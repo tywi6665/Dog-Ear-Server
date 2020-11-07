@@ -9,21 +9,17 @@ const browserObject = require('./utils/browser');
 const scraperController = require('./utils/pageController');
 
 const app = express();
-// app.use(index);
+app.use(index);
 
-const server = express()
-    .use(index)
-    .listen(port, () => console.log(`Listening on ${port}`));
+const socketServer = http.createServer(app);
 
-// const socketServer = http.createServer(app);
-
-const io = socketIo(server);
+const io = socketIo(socketServer);
 
 io.on("connection", (socket) => {
     console.log("New client connected");
 
     socket.on('from_client', url => {
-        console.log("from_client", url)
+
         const scrape = new Promise((resolve, reject) => {
             //Start the browser and create a browser instance
             let browserInstance = browserObject.startBrowser();
@@ -42,7 +38,7 @@ io.on("connection", (socket) => {
     });
 })
 
-// socketServer.listen(port, () => console.log(`Socket Server listening on: ${port}`));
+socketServer.listen(port, () => console.log(`Socket Server listening on: ${port}`));
 
 /* Create HTTP server for node application */
 // const server = http.createServer(app)
