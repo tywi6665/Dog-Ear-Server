@@ -23,7 +23,7 @@ io.on("connection", (socket) => {
     console.log("New client connected");
 
     socket.on('from_client', url => {
-
+        console.log("from_client", url)
         const scrape = new Promise((resolve, reject) => {
             //Start the browser and create a browser instance
             let browserInstance = browserObject.startBrowser();
