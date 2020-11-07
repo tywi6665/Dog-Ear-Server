@@ -40,11 +40,6 @@ io.on("connection", (socket) => {
 
 socketServer.listen(port, () => console.log(`Socket Server listening on: ${port}`));
 
-/* Create HTTP server for node application */
-// const server = http.createServer(app)
-
-/* Node application will be running on 4000 port */
-// server.listen(4000);
 
 
 
