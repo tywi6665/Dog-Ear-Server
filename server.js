@@ -26,7 +26,18 @@ io.on("connection", (socket) => {
                 //Start the browser and create a browser instance
                 let browserInstance = browserObject.startBrowser();
                 // Pass the browser instance to the scraper controller
-                resolve(scraperController(browserInstance, url))
+                if (browserInstance) {
+                    resolve(scraperController(browserInstance, url))
+                } else {
+                    let data = {
+                        title: "",
+                        imgSrc: "",
+                        author: "",
+                        description: "",
+                        tags: []
+                    }
+                    socket.emit("from_server", data);
+                }
             })
 
             scrape.then(function (data) {
