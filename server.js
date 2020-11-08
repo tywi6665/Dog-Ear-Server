@@ -21,18 +21,22 @@ io.on("connection", (socket) => {
 
     socket.on('from_client', url => {
 
-        const scrape = new Promise((resolve, reject) => {
-            //Start the browser and create a browser instance
-            let browserInstance = browserObject.startBrowser();
-            // Pass the browser instance to the scraper controller
-            resolve(scraperController(browserInstance, url))
-        })
+        try {
+            const scrape = new Promise((resolve, reject) => {
+                //Start the browser and create a browser instance
+                let browserInstance = browserObject.startBrowser();
+                // Pass the browser instance to the scraper controller
+                resolve(scraperController(browserInstance, url))
+            })
 
-        scrape.then(function (data) {
-            console.log("emitting data...")
-            //emit scraped data
-            socket.emit("from_server", data);
-        })
+            scrape.then(function (data) {
+                console.log("emitting data...")
+                //emit scraped data
+                socket.emit("from_server", data);
+            })
+        } catch (error) {
+            console.error(error)
+        }
 
     });
     socket.on("disconnect", () => {
