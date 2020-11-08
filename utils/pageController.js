@@ -1,10 +1,10 @@
 const pageScraper = require('./pageScraper');
-const fs = require("fs");
 
 async function scrapeAll(browserInstance, url) {
     let browser;
     try {
         browser = await browserInstance;
+        console.log("scraping...")
         let scrapedData = await pageScraper.scraper(browser, url);
         await browser.close();
         console.log("Done")

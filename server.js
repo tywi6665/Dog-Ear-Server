@@ -9,6 +9,7 @@ const browserObject = require('./utils/browser');
 const scraperController = require('./utils/pageController');
 
 const app = express();
+
 app.use(index);
 
 const socketServer = http.createServer(app);
@@ -28,6 +29,7 @@ io.on("connection", (socket) => {
         })
 
         scrape.then(function (data) {
+            console.log("emitting data...")
             //emit scraped data
             socket.emit("from_server", data);
         })

@@ -3,7 +3,7 @@ var parse = require('url-parse')
 const scraperObject = {
     async scraper(browser, url) {
         let page = await browser.newPage();
-        // console.log(`Navigating to ${url}...`);
+        console.log(`Navigating to ${url}...`);
 
         // Navigate to the selected page && Wait for the required DOM to be rendered
         await page.goto(url, { waitUntil: 'networkidle2' });
