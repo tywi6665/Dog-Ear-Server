@@ -24,22 +24,10 @@ const defaultData = data = {
     tags: []
 }
 
-io.on('connect_error', err => handleErrors(err));
-io.on('connect_failed', err => handleErrors(err));
-io.on('disconnect', () => {
-    console.log("Client disconnected");
-});
-
-const handleErrors = () => {
-    //emit default data
-    socket.emit("from_server", defaultData)
-}
-
 io.on("connection", (socket) => {
     console.log("New client connected");
 
     socket.on('from_client', url => {
-
 
         const scrape = new Promise((resolve, reject) => {
 
@@ -47,11 +35,7 @@ io.on("connection", (socket) => {
                 //Start the browser and create a browser instance
                 let browserInstance = browserObject.startBrowser();
                 // Pass the browser instance to the scraper controller
-                if (browserInstance) {
-                    resolve(scraperController(browserInstance, url))
-                } else {
-                    reject(socket.emit("from_server", defaultData))
-                }
+                resolve(scraperController(browserInstance, url))
             } catch (error) {
                 console.error(error)
             }
