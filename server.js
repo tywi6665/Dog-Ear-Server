@@ -45,10 +45,15 @@ io.on("connection", (socket) => {
             console.log("emitting data...")
             //emit scraped data
             socket.emit("from_server", data);
+            socket.disconnect()
+            console.log("Client disconnected");
         })
 
     });
+
+
     socket.on("disconnect", () => {
+        socket.disconnect()
         console.log("Client disconnected");
     });
 })
