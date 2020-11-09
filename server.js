@@ -24,6 +24,17 @@ const defaultData = data = {
     tags: []
 }
 
+socket.on('connect_error', err => handleErrors(err));
+socket.on('connect_failed', err => handleErrors(err));
+socket.on('disconnect',
+    console.log("Client disconnected")
+);
+
+const handleErrors = () => {
+    //emit default data
+    socket.emit("from_server", defaultData)
+}
+
 io.on("connection", (socket) => {
     console.log("New client connected");
 
