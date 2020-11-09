@@ -24,11 +24,11 @@ const defaultData = data = {
     tags: []
 }
 
-socket.on('connect_error', err => handleErrors(err));
-socket.on('connect_failed', err => handleErrors(err));
-socket.on('disconnect',
-    console.log("Client disconnected")
-);
+io.on('connect_error', err => handleErrors(err));
+io.on('connect_failed', err => handleErrors(err));
+io.on('disconnect', () => {
+    console.log("Client disconnected");
+});
 
 const handleErrors = () => {
     //emit default data
