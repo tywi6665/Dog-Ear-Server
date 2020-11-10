@@ -6,13 +6,16 @@ async function scrapeAll(browserInstance, url) {
         browser = await browserInstance;
         console.log("scraping...")
         let scrapedData = await pageScraper.scraper(browser, url);
-        await browser.close();
-        console.log("Done")
+        // await browser.close();
+        // console.log("Done")
 
         return scrapedData;
     }
     catch (err) {
         console.log("Could not resolve the browser instance => ", err);
+    } finally {
+        await browser.close();
+        console.log("Closing Browser")
     }
 }
 
