@@ -140,6 +140,16 @@ const scraperObject = {
                         console.error(error)
                     }
                     break;
+                // If hostname is omnivorescookbook.com
+                case "omnivorescookbook.com":
+                    try {
+                        title = await page.$eval("head > meta[property='og:title']", element => element.content);
+                        imgSrc = await page.$eval("head > meta[property='og:image']", element => element.content);
+                        description = await page.$eval("head > meta[property='og:description']", element => element.content);
+                    } catch (error) {
+                        console.error(error)
+                    }
+                    break;
                 default:
                     break;
             }
