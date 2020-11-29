@@ -6,8 +6,8 @@ async function scrapeAll(browserInstance, url) {
         browser = await browserInstance;
         console.log("scraping...")
         let scrapedData = await pageScraper.scraper(browser, url);
-        // await browser.close();
-        // console.log("Done")
+        await browser.close();
+        console.log("Done")
 
         return scrapedData;
     }
@@ -16,6 +16,7 @@ async function scrapeAll(browserInstance, url) {
     } finally {
         await browser.close();
         console.log("Closing Browser")
+
     }
 }
 
